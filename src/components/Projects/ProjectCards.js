@@ -11,7 +11,15 @@ function ProjectCards(props) {
       <Card.Body>
         <Card.Title>{props.title}</Card.Title>
         <Card.Text style={{ textAlign: "justify" }}>
-          {props.description}
+          {Array.isArray(props.description) ? (
+            <ul>
+              {props.description.map((point, index) => (
+                <li key={index}>{point}</li>
+              ))}
+            </ul>
+          ) : (
+            props.description
+          )}
         </Card.Text>
         <Button variant="primary" href={props.ghLink} target="_blank">
           <BsGithub /> &nbsp;
@@ -19,8 +27,6 @@ function ProjectCards(props) {
         </Button>
         {"\n"}
         {"\n"}
-
-        {/* If the component contains Demo link and if it's not a Blog then, it will render the below component  */}
 
         {!props.isBlog && props.demoLink && (
           <Button
@@ -37,4 +43,5 @@ function ProjectCards(props) {
     </Card>
   );
 }
+
 export default ProjectCards;
